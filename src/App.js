@@ -15,7 +15,6 @@ class App extends Component {
 	contacts: [],
   }
   
-  
   componentDidMount() {
     fetch("http://192.168.1.180:8080/contacts")
 			.then(res => res.json())
@@ -26,22 +25,16 @@ class App extends Component {
 			err => {}
 		);
 	}
-	
-	
-
-  
-  renderContacts() {
-	return this.state.contacts.map(contact =>
-		<ul key={contact.name}>{contact.name}</ul>);
-  }
  
-	
   render() {
-	
     return (
       <div className="App" style={{ paddingTop: '10px' }}>
-        
-		{this.renderContacts()}
+
+        <ul>
+          {this.state.contacts.map(contact =>
+            <li key={contact.name}>{contact.name}</li>)
+          }
+        </ul> 
 
       </div>
     );
