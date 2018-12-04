@@ -1,28 +1,51 @@
 import React, { Component } from 'react';
+
+import axios from 'axios';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { clickButton } from './actions';
+
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+	
+  state = {
+	contacts: [],
+  }
+  
+  
+  componentDidMount() {
+    fetch("http://localhost:8080/contacts")
+			.then(res => res.json())
+			.then(
+			data => {
+				const contacts = data._embedded.contacts;
+				this.setState({ contacts });},
+			err => {}
+		);
+	}
+	
+	
+
+  
+  renderContacts() {
+	return this.state.contacts.map(contact =>
+		<ul key={contact.name}>{contact.name}</ul>);
+  }
+ 
+	
   render() {
+	
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="App" style={{ paddingTop: '10px' }}>
+        
+		{this.renderContacts()}
+
       </div>
     );
   }
 }
 
-export default App;
+export default (App);
