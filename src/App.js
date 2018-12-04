@@ -17,7 +17,7 @@ class App extends Component {
   
   
   componentDidMount() {
-    fetch("http://localhost:8080/contacts")
+    fetch("http://192.168.1.180:8080/contacts")
 			.then(res => res.json())
 			.then(
 			data => {
