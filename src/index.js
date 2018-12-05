@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './css/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
@@ -12,7 +12,10 @@ import thunk from 'redux-thunk';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import Contacts from './components/Contacts';
+
 import AddContact from './components/AddContact';
+import FormUpdate from './components/FormUpdate'
+
 import PageNotFound from './components/PageNotFound';
 
 import { Store } from './store';
@@ -21,16 +24,16 @@ import { Store } from './store';
 const store = createStore(applyMiddleware(thunk));
 
 ReactDOM.render(
-	<Provider store={store}>
-		<BrowserRouter>
-			<Switch>
-				<Route path="/" exact={true} component={App} />
-				<Route path="/contacts" exact={true} component={Contacts} />
-				<Route path="/addContac" component={AddContact} />
-				<Route path='*' component={PageNotFound} />
-			</Switch>
-		</BrowserRouter>
-	 </Provider>
+
+	<BrowserRouter>
+		<Switch>
+			<Route path="/" exact={true} component={App} />
+			<Route path="/contacts" exact={true} component={Contacts} />
+			<Route path="/addContac" component={AddContact} />
+			<Route path="/updateContac" component={FormUpdate} />
+			<Route path='*' component={PageNotFound} />
+		</Switch>
+    </BrowserRouter>
 , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
