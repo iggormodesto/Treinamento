@@ -1,10 +1,9 @@
 import React from 'react';
-import reactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import Contacts from './Contacts';
+//import Contacts from './Contacts';
 import { Link } from 'react-router-dom'
-//import Contact from './models/contact';
+
 export default class FormUpdate extends React.Component{
 	constructor(props){
 		super(props);

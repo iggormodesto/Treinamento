@@ -18,22 +18,21 @@ import FormUpdate from './components/FormUpdate'
 
 import PageNotFound from './components/PageNotFound';
 
-import { Store } from './store';
-
 // use applyMiddleware to add the thunk middleware to the store
 const store = createStore(applyMiddleware(thunk));
 
 ReactDOM.render(
-
-	<BrowserRouter>
-		<Switch>
-			<Route path="/" exact={true} component={App} />
-			<Route path="/contacts" exact={true} component={Contacts} />
-			<Route path="/addContac" component={AddContact} />
-			<Route path="/updateContac" component={FormUpdate} />
-			<Route path='*' component={PageNotFound} />
-		</Switch>
-    </BrowserRouter>
+	<Provider store={store}>
+		<BrowserRouter>
+			<Switch>
+				<Route path="/" exact={true} component={App} />
+				<Route path="/contacts" exact={true} component={Contacts} />
+				<Route path="/addContac" component={AddContact} />
+				<Route path="/updateContac" component={FormUpdate} />
+				<Route path='*' component={PageNotFound} />
+			</Switch>
+		</BrowserRouter>
+	</Provider>
 , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

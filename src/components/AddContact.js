@@ -1,5 +1,5 @@
 import React from 'react';
-import reactDOM from 'react-dom';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Contact from '../models/Contact';
 
@@ -11,48 +11,56 @@ export default class AddContact extends React.Component{
 		this.state = {
 			contact: [],
 		}
+		
+		this.handleInputChange = this.handleInputChange.bind(this);
+	}
+	
+	handleInputChange = event => {
+		const target = event.target;
+		const value = target.value;
+		const name = target.name;
+
+		let contact = Object.assign({}, this.state.contact);
+		contact[name] = value;
+		this.setState({contact});
 	}
 
 
-	addContact(){
-		console.log('teste');
-		fetch("http://192.168.1.180:8080/contacts", {
+	handleSubmit = event => {
+		event.preventDefault();
+		fetch('http://192.168.1.180:8080/contacts', {
 			method: 'POST',
-		    headers: {
+			headers: {
 				'Accept': 'application/json',
-				'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
 			},
 		    body: JSON.stringify(this.state.contact)
-		}).then(res => res.json())
-		.then(
-			data => {
-				console.log(data);
-				//this.props.history.push("/contacts");
-			},
-			err => {
-				console.log(err);
-			}
-		);
+		}).then(res => { 	 
+			alert('Contato cadastrado');
+			this.props.history.push("/contacts");
+		});
 	}
-
+	
 	render(){
 		const btnMargin={
 			marginRight: '10px'
 		}
 		return(
 			<section className="container text-left">
-				<form>
+				<form onSubmit={this.handleSubmit.bind(this)}>
 					<div className="form-row">
 						<div className="form-group col-sm-6">
 							<label htmlFor="name">Nome</label>
-							<input type="text" className="form-control" name="name" 
-							id="name"  
+							<input type="text" className="form-control" name="name" id="name"
+							value={this.state.contact.name || ''}
+							onChange={this.handleInputChange} 
 							placeholder="Nome completo"/>
 						</div>
 						<div className="form-group col-sm-3">
 							<label htmlFor="gender">Gênero</label>
-							<select id="gender" name="gender"  
-							className="form-control" required >
+							<select id="gender" name="gender" className="form-control" required
+							value={this.state.contact.gender || ''}
+							onChange={this.handleInputChange}>
 								<option defaultValue value="">Escolha</option>
 								<option value="MALE">Masculino</option>
 								<option value="FEMALE">Feminino</option>
@@ -60,8 +68,9 @@ export default class AddContact extends React.Component{
 						</div>
 						<div className="form-group col-sm-3 ">
 							<label htmlFor="birthday">Nascimento</label>
-							<input type="date" className="form-control" name="birthday" 
-							 id="birthday"
+							<input type="date" className="form-control" name="birthday" id="birthday"
+							value={this.state.contact.birthday || ''}
+							onChange={this.handleInputChange}
 							placeholder="Data de Aniversário" />
 						</div>
 					</div>
@@ -70,24 +79,22 @@ export default class AddContact extends React.Component{
 							<label htmlFor="email">Email</label>
 							<input type="email" name="email"  
 							className="form-control" id="email" 
+							value={this.state.contact.email || ''}
+							onChange={this.handleInputChange}
 							placeholder="E-mail"/>
 						</div>
 						<div className="form-group col-sm-4">
 							<label htmlFor="phone">Telefone</label>
-							<input type="number" className="form-control" name="phone" 
-							 id="phone"
-							placeholder="Telefone" />
+							<input type="number" className="form-control"
+							 name="phone" id="phone"
+							 value={this.state.contact.phone || ''}
+							 onChange={this.handleInputChange}
+							 placeholder="Telefone" />
 						</div>
 					</div>
 					<div className="text-right">
-						<button style={btnMargin} className="btn btn-light">
-							<Link to='/contacts'>
-								Voltar
-							</Link>
-						</button>
-						<button onClick={this.addContact.bind(this)} className="btn btn-primary">
-							Salvar
-						</button>
+						<Link to='/contacts' style={btnMargin} className="btn btn-light">Voltar</Link>
+						<button type="submit" className="btn btn-primary">Salvar</button>
 					</div>
 				</form>
 			</section>

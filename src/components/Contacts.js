@@ -1,6 +1,4 @@
 import React from 'react';
-import reactDOM from 'react-dom';
-//import Contact from './models/contact';
 
 import { Link } from 'react-router-dom'
 

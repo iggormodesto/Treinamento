@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-
 import { Link } from 'react-router-dom'
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { clickButton } from './actions';
-
-
-import logo from './logo.svg';
 import './css/App.css';
 
 class App extends Component {
