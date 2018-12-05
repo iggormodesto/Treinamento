@@ -1,10 +1,9 @@
 import React from 'react';
-import reactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import Contacts from './Contacts';
+//import Contacts from './Contacts';
 import { Link } from 'react-router-dom'
-//import Contact from './models/contact';
+
 export default class FormUpdate extends React.Component{
 	constructor(props){
 		super(props);
@@ -47,7 +46,10 @@ export default class FormUpdate extends React.Component{
 		.then(res=> {
 			console.log(res);
 			alert('Contato atualizado');
-	 });
+		 })
+		 .catch(function (error) {
+			console.log(error);
+		  });
 	 	event.preventDefault();
 	}
 	render(){
@@ -89,9 +91,9 @@ export default class FormUpdate extends React.Component{
 						</div>
 						<div className="form-group col-sm-4">
 							<label htmlFor="phone">Telefone</label>
-							<input type="number" className="form-control" name="phone" 
-							 id="phone" onChange={this.handlePhoneChange} value={this.state.phone}
-							placeholder="Telefone" />
+							<input type="number" className="form-control" name="phone"
+							 id="phone" onChange={this.handlePhoneChange}
+							placeholder="Telefone" value={this.state.phone} />
 						</div>
 					</div>
 					<div className="text-right">

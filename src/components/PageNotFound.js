@@ -1,7 +1,4 @@
 import React from 'react';
-import reactDOM from 'react-dom';
-//import Contact from './models/contact';
-
 
 export default class PageNotFound extends React.Component{
 	constructor(props){
