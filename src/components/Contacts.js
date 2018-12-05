@@ -14,13 +14,14 @@ export default class Contacts extends React.Component{
 	}
   
 	componentDidMount() {
-		this.getUsers();
+		this.getContacts();
 	}
 
-	getUsers(){
-		fetch("http://192.168.1.180:8080/contacts")
-			.then(res => res.json())
-			.then(
+	getContacts(){
+		fetch("http://192.168.1.180:8080/contacts", {
+			method: 'get'
+		}).then(res => res.json())
+		.then(
 			data => {
 				const contacts = data._embedded.contacts;
 				this.setState({ contacts });
@@ -31,11 +32,10 @@ export default class Contacts extends React.Component{
 
 	
 	deleteContact(contact) {
-		console.log(contact._links.self.href);
 		return fetch(contact._links.self.href, {
 			method: 'delete'
 		}).then(response => {
-			this.getUsers();		
+			this.getContacts();		
 		});
 	}
 
@@ -49,7 +49,7 @@ export default class Contacts extends React.Component{
 					</button>
 				</li>)
 			  }
-			  				<Link to="/addContac">Adicionar</Link>
+			  <Link to="/addContac">Adicionar</Link>
 			</ul>
 		);
 	}
