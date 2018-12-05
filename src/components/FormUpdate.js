@@ -47,7 +47,10 @@ export default class FormUpdate extends React.Component{
 		.then(res=> {
 			console.log(res);
 			alert('Contato atualizado');
-	 });
+		 })
+		 .catch(function (error) {
+			console.log(error);
+		  });
 	 	event.preventDefault();
 	}
 	render(){
