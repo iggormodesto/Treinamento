@@ -1,17 +1,38 @@
 import React from 'react';
 import reactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import Contact from './models/contact';
-export default class Form extends React.Component{
-	constructor(props){
+import Contact from '../models/Contact';
+
+import { Link } from 'react-router-dom'
+
+export default class AddContact extends React.Component{
+	constructor(props, Contact){
 		super(props);
 		this.state = {
-
+			contact: [],
 		}
 	}
 
-	componentDidMount(){
 
+	addContact(){
+		console.log('teste');
+		fetch("http://192.168.1.180:8080/contacts", {
+			method: 'POST',
+		    headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+		    body: JSON.stringify(this.state.contact)
+		}).then(res => res.json())
+		.then(
+			data => {
+				console.log(data);
+				//this.props.history.push("/contacts");
+			},
+			err => {
+				console.log(err);
+			}
+		);
 	}
 
 	render(){
@@ -59,8 +80,14 @@ export default class Form extends React.Component{
 						</div>
 					</div>
 					<div className="text-right">
-						<button style={btnMargin} className="btn btn-light">Voltar</button>
-						<button type="submit" className="btn btn-primary">Salvar</button>
+						<button style={btnMargin} className="btn btn-light">
+							<Link to='/contacts'>
+								Voltar
+							</Link>
+						</button>
+						<button onClick={this.addContact.bind(this)} className="btn btn-primary">
+							Salvar
+						</button>
 					</div>
 				</form>
 			</section>
