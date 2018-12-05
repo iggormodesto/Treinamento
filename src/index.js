@@ -11,6 +11,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import Contacts from './components/Contacts';
 import Form from './components/Form';
+import FormUpdate from './components/FormUpdate'
 import PageNotFound from './components/PageNotFound';
 
 import { Store } from './store';
@@ -21,6 +22,7 @@ ReactDOM.render(
 			<Route path="/" exact={true} component={App} />
 			<Route path="/contacts" exact={true} component={Contacts} />
 			<Route path="/addContac" component={Form} />
+			<Route path="/updateContac" component={FormUpdate} />
 			<Route path='*' component={PageNotFound} />
 		</Switch>
     </BrowserRouter>

@@ -47,6 +47,8 @@ export default class Contacts extends React.Component{
 					<button onClick={this.deleteContact.bind(this, contact)}>
 						Deletar
 					</button>
+					<Link to={{pathname: '/updateContac',
+					state:{contact: contact}}} >Atualizar</Link>
 				</li>)
 			  }
 			  				<Link to="/addContac">Adicionar</Link>
