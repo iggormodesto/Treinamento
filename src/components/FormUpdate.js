@@ -9,15 +9,13 @@ export default class FormUpdate extends React.Component{
 	constructor(props){
 		super(props);
 		this.state= {
-			contact: '',
 			name:'',
 			email:'',
 			gender:'',
 			birthday:'',
 			phone:'',
-			contact1:{name:''}
 		}
-		this.handleContactChange = this.handleContactChange.bind(this);
+		
 		this.handleNameChange = this.handleNameChange.bind(this);
 		this.handleEmailChange = this.handleEmailChange.bind(this);
 		this.handleGenderChange = this.handleGenderChange.bind(this);
@@ -25,7 +23,7 @@ export default class FormUpdate extends React.Component{
 		this.handlePhoneChange = this.handlePhoneChange.bind(this);
 		this.handleUpdate = this.handleUpdate.bind(this);
 	}
-	handleContactChange = event =>{this.setState({ contact: event.target.value })}
+	
 	handleNameChange = event =>{this.setState({ name: event.target.value })}
 	handleEmailChange = event =>{this.setState({ email: event.target.value })}
 	handleGenderChange = event =>{this.setState({ gender: event.target.value })}
@@ -48,10 +46,9 @@ export default class FormUpdate extends React.Component{
 		phone: this.state.phone, email: this.state.email})
 		.then(res=> {
 			console.log(res);
-		 console.log(res.data);
+			alert('Contato atualizado');
 	 });
-	 alert('Contato atualizado');
-	 event.preventDefault();
+	 	event.preventDefault();
 	}
 	render(){
 		const btnMargin={
@@ -93,7 +90,7 @@ export default class FormUpdate extends React.Component{
 						<div className="form-group col-sm-4">
 							<label htmlFor="phone">Telefone</label>
 							<input type="number" className="form-control" name="phone" 
-							 id="phone" onChange={this.handlePhoneChange}
+							 id="phone" onChange={this.handlePhoneChange} value={this.state.phone}
 							placeholder="Telefone" />
 						</div>
 					</div>
