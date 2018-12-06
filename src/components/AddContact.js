@@ -52,17 +52,14 @@ export default class AddContact extends React.Component{
 	}
 	
 	render(){
-		const btnMargin={
-			marginRight: '10px'
-		}
 		return(
 			<Modal
 				title="Adicionar"
 				visible={this.state.visibleModal}
 				onCancel={this.handleCancel}
 				footer={[
-					<Link to='/contacts' style={btnMargin} className="btn btn-light">CANCELAR</Link>,
-					<button onClick={this.handleSubmit.bind(this)} type="submit" className="btn btn-primary">Adicionar</button>
+					<Link to='/contacts'>Cancelar</Link>,
+					<button onClick={this.handleSubmit.bind(this)} type="submit" className="btn ant-btn-primary">Adicionar</button>
 
 				]}			
 			>
