@@ -62,4 +62,13 @@ a {
     height: 4rem;
     font-size: 2rem;
     font-weight: 100;
+    .anticon-search svg {
+        width: 2rem;
+        height: 2rem;
+    }
+    ::placeholder, input {
+        font-size: 2rem;
+        font-weight: 100;
+        align-self: center;
+    }
 }
