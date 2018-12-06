@@ -1,15 +1,18 @@
 import React from 'react';
 
+import { Modal, Button } from 'antd';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Contact from '../models/Contact';
 
 import { Link } from 'react-router-dom'
 
 export default class AddContact extends React.Component{
-	constructor(props, Contact){
+	constructor(props){
 		super(props);
 		this.state = {
 			contact: [],
+			visibleModal: true,
 		}
 		
 		this.handleInputChange = this.handleInputChange.bind(this);
@@ -46,9 +49,17 @@ export default class AddContact extends React.Component{
 			marginRight: '10px'
 		}
 		return(
-			<section className="container text-left">
-				<form onSubmit={this.handleSubmit.bind(this)}>
-					<div className="form-row">
+			<Modal
+				title="ADICIONAR"
+				visible={this.state.visibleModal}
+				onCancel={this.handleCancel}
+				footer={[
+					<Link to='/contacts' style={btnMargin} className="btn btn-light">CANCELAR</Link>,
+					<button onClick={this.handleSubmit.bind(this)} type="submit" className="btn btn-primary">ADICIONAR</button>
+				]}			
+			>
+				<section className="container text-left">
+					<form>
 						<div className="form-group col-sm-6">
 							<label htmlFor="name">Nome</label>
 							<input type="text" className="form-control" name="name" id="name"
@@ -73,8 +84,6 @@ export default class AddContact extends React.Component{
 							onChange={this.handleInputChange}
 							placeholder="Data de Aniversário" />
 						</div>
-					</div>
-					<div className="form-row">
 						<div className="form-group col-sm-8">
 							<label htmlFor="email">Email</label>
 							<input type="email" name="email"  
@@ -86,18 +95,14 @@ export default class AddContact extends React.Component{
 						<div className="form-group col-sm-4">
 							<label htmlFor="phone">Telefone</label>
 							<input type="number" className="form-control"
-							 name="phone" id="phone"
-							 value={this.state.contact.phone || ''}
-							 onChange={this.handleInputChange}
-							 placeholder="Telefone" />
+							name="phone" id="phone"
+							value={this.state.contact.phone || ''}
+							onChange={this.handleInputChange}
+							placeholder="Telefone" />
 						</div>
-					</div>
-					<div className="text-right">
-						<Link to='/contacts' style={btnMargin} className="btn btn-light">Voltar</Link>
-						<button type="submit" className="btn btn-primary">Salvar</button>
-					</div>
-				</form>
-			</section>
+					</form>
+				</section>
+			</Modal>
 		)
 	}
 }
