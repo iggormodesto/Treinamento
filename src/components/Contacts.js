@@ -93,7 +93,7 @@ export default class Contacts extends React.Component{
 					onChange: (page) => {
 					  console.log(page);
 					},
-					pageSize: 3,
+					pageSize: 5,
 				  }}
 				renderItem={contact => (
 					<List.Item actions={
