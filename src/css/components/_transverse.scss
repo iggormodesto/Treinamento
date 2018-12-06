@@ -72,3 +72,34 @@ a {
         align-self: center;
     }
 }
+
+.btn-add {
+    display: block;
+    background: #d52738;
+    padding: 13px;
+    color: #fff;
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    -webkit-transition: width 2s; /* For Safari 3.1 to 6.0 */
+    transition: width 1s;
+    float: right;
+    overflow: hidden;
+    position: absolute;
+    bottom: 10%;
+    right: 5%;
+    text-align: center;
+    .anticon {
+        vertical-align: 0;
+        svg {
+            width: 25px;
+            height: 25px;
+            margin: 0 0.5rem 0.5rem 0;
+        }
+    }
+    &:hover {
+        width: 200px;
+        color: #fff;
+        text-align: left;
+    }
+}
