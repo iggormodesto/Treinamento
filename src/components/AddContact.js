@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Modal, Button } from 'antd';
+import { Modal } from 'antd';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Contact from '../models/Contact';
