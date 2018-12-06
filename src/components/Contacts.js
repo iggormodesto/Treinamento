@@ -125,7 +125,7 @@ export default class Contacts extends React.Component{
 					
 					footer={[
 						<Button key="back" onClick={this.handleCancel.bind(this)}>Não</Button>,
-						<Button key="submit" onClick={this.handleOk.bind(this)}>Sim</Button>,
+						<Button key="submit" onClick={this.handleOk.bind(this)} className="btn ant-btn-primary">Sim</Button>,
 					]}					
 					>
 				</Modal>

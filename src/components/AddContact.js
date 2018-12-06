@@ -58,8 +58,8 @@ export default class AddContact extends React.Component{
 				visible={this.state.visibleModal}
 				onCancel={this.handleCancel}
 				footer={[
-					<Link to='/contacts'>Cancelar</Link>,
-					<button onClick={this.handleSubmit.bind(this)} type="submit" className="btn ant-btn-primary">Adicionar</button>
+					<Link key="back" to='/contacts'>Cancelar</Link>,
+					<button key="submit" onClick={this.handleSubmit.bind(this)} type="submit" className="btn ant-btn-primary">Adicionar</button>
 
 				]}			
 			>

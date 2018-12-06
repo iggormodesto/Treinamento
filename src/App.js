@@ -25,7 +25,7 @@ class App extends Component {
 					</FormItem>
 					<FormItem>
 						<Checkbox>Remember me</Checkbox>
-						<a className="login-form-forgot" href="">Forgot password</a>
+						<a className="login-form-forgot">Forgot password</a>
 					</FormItem>
 					<Button type="primary" className="login-form-button"> 
 						<Link to="/contacts">ENTRAR</Link>
