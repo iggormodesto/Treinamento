@@ -28,7 +28,21 @@
     }
 }
 
-a:hover {
-    color: #d52738;
-    text-decoration: none;
+a {
+    color: #000;
+    font-weight: bold;
+    a:hover {
+        color: #d52738;
+        text-decoration: none;
+    }
+}
+
+.ant-btn-primary {
+    background-color: #d52738;
+    border-color: #d52738;
+    &:hover {
+        background-color: transparent;
+        border-color: #d52738;
+        color: #d52738;
+    }
 }
