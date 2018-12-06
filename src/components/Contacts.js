@@ -1,10 +1,15 @@
 import React from 'react';
-import {List} from 'antd';
+import {List, Form} from 'antd';
   //import 'antd/dist/antd.css';
 import { Link } from 'react-router-dom'
 import { Modal, Button } from 'antd';
 
 import 'antd/dist/antd.css';
+import {
+	Icon, 
+	Input
+} from 'antd';
+import FormItem from 'antd/lib/form/FormItem';
 
 
 export default class Contacts extends React.Component{
@@ -87,7 +92,16 @@ export default class Contacts extends React.Component{
 					<span>Agenda</span>
 					<span>SNEWS</span>
 				</h1>
-				<input type="text" className="search-field" onChange={this.handleSearch}/>
+
+				<Form>
+					<FormItem>
+						<Input className="search-field" 
+							onChange={this.handleSearch} 
+							suffix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />} 
+							placeholder="Busca" />
+					</FormItem>
+				</Form>
+
 				<List
 				//className="demo-loadmore-list"
 				loading={initLoading}
