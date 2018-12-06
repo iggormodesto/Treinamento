@@ -140,15 +140,18 @@ export default class Contacts extends React.Component{
 				</Link>
 
 				<Modal
-					title="Tem certeza que deseja excluir?"
+					//title="Tem certeza que deseja excluir?"
 					visible={this.state.visibleModal}
 					onCancel={this.handleCancel}
 					
 					footer={[
-						<Button key="submit" onClick={this.handleOk.bind(this)}>Sim</Button>,
-						<Button key="back" onClick={this.handleCancel.bind(this)} className="btn ant-btn-primary">Não</Button>,
-					]}					
+						<Link key="submit" to='#' onClick={this.handleOk.bind(this)}>Sim</Link>,
+						<button key="back" onClick={this.handleCancel.bind(this)} type="submit" className="btn ant-btn-primary">Não</button>
+					]}
+					
+					
 					>
+					<h2>Tem certeza que deseja excluir?</h2>
 				</Modal>
 			</React.Fragment>
 		);
