@@ -27,3 +27,30 @@
 ul li {
   font-weight: bold;
   text-align: center; }
+
+#header {
+  text-align: center;
+  background-color: #F8F8F8; }
+  #header img {
+    padding: 1rem 0; }
+
+#root {
+  min-height: 68vh;
+  margin: 3rem 0 4rem 0; }
+
+#footer {
+  background-color: #F2F2F2;
+  text-align: center;
+  padding: 1rem 0; }
+  #footer p {
+    margin: 0; }
+    #footer p a {
+      font-weight: bold;
+      color: #000; }
+      #footer p a:hover {
+        color: #d52738;
+        text-decoration: none; }
+
+a:hover {
+  color: #d52738;
+  text-decoration: none; }
