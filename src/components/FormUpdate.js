@@ -43,7 +43,6 @@ export default class FormUpdate extends React.Component{
 			},
 		    body: JSON.stringify(this.state.contact)
 		}).then(res=> {
-			console.log(res);
 			this.props.history.push("/contacts");
 			alert('Contato atualizado');
 		 })
@@ -55,12 +54,12 @@ export default class FormUpdate extends React.Component{
 	render(){
 		return(
 			<Modal
-				title="EDITAR"
+				title="Editar"
 				visible={this.state.visibleModal}
 				onCancel={this.handleCancel}
 				footer={[
 					<Link key="back" to='/contacts'>Cancelar</Link>,
-					<button key="submit" onClick={this.handleUpdate.bind(this)} type="submit" className="btn ant-btn-primary">ATUALIZAR</button>
+					<button key="submit" onClick={this.handleUpdate.bind(this)} type="submit" className="btn ant-btn-primary">Atualizar</button>
 				]}
 			>
 				<section className="container text-left">

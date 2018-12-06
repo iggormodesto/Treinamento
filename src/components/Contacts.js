@@ -148,8 +148,6 @@ export default class Contacts extends React.Component{
 						<Link key="submit" to='#' onClick={this.handleOk.bind(this)}>Sim</Link>,
 						<button key="back" onClick={this.handleCancel.bind(this)} type="submit" className="btn ant-btn-primary">Não</button>
 					]}
-					
-					
 					>
 					<h2>Tem certeza que deseja excluir?</h2>
 				</Modal>
