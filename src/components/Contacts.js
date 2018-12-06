@@ -115,7 +115,7 @@ export default class Contacts extends React.Component{
 					<List.Item actions={
 						[
 							//Adicionar o SVG aqui
-							<a role="button" onClick={this.showModal.bind(this, contact)}>
+							<a href="#" onClick={this.showModal.bind(this, contact)}>
 								<Icon type="delete" />
 								EXCLUIR
 							</a>,
@@ -132,7 +132,10 @@ export default class Contacts extends React.Component{
 					</List.Item>
 				)}
 				/>
-		  		<Link to="/addContac">Adicionar</Link>
+		  		<Link to="/addContac" className="btn-add">
+				  <Icon type="plus" />
+				  Adicionar Contato
+				</Link>
 
 				<Modal
 					title="Tem certeza que deseja excluir?"
