@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Modal, Button } from 'antd';
+import { Modal } from 'antd';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Contact from '../models/Contact';
@@ -26,6 +26,13 @@ export default class AddContact extends React.Component{
 		let contact = Object.assign({}, this.state.contact);
 		contact[name] = value;
 		this.setState({contact});
+	}
+
+	handleCancel = (e) => {
+		this.props.history.push("/contacts");
+		this.setState({
+			visibleModal: false,
+		});
 	}
 
 
@@ -56,6 +63,7 @@ export default class AddContact extends React.Component{
 				footer={[
 					<Link to='/contacts' style={btnMargin} className="btn btn-light">CANCELAR</Link>,
 					<button onClick={this.handleSubmit.bind(this)} type="submit" className="btn btn-primary">Adicionar</button>
+
 				]}			
 			>
 				<section className="container text-left">

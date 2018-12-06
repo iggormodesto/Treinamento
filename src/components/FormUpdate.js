@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 //import Contacts from './Contacts';
 import { Link } from 'react-router-dom'
+import { Modal } from 'antd';
 
 export default class FormUpdate extends React.Component{
 	constructor(props){
@@ -13,6 +14,7 @@ export default class FormUpdate extends React.Component{
 			gender:'',
 			birthday:'',
 			phone:'',
+			visibleModal: true,
 		}
 		
 		this.handleNameChange = this.handleNameChange.bind(this);
@@ -38,6 +40,13 @@ export default class FormUpdate extends React.Component{
 			phone:this.props.location.state.contact.phone,
 		})
 	}
+
+	handleCancel = (e) => {
+		this.props.history.push("/contacts");
+		this.setState({
+			visibleModal: false,
+		});
+	}
 	
 	handleUpdate = event => {
 		axios.put(this.props.location.state.contact._links.self.href, {name:this.state.name,
@@ -45,6 +54,7 @@ export default class FormUpdate extends React.Component{
 		phone: this.state.phone, email: this.state.email})
 		.then(res=> {
 			console.log(res);
+			this.props.history.push("/contacts");
 			alert('Contato atualizado');
 		 })
 		 .catch(function (error) {
@@ -57,9 +67,17 @@ export default class FormUpdate extends React.Component{
 			marginRight: '10px'
 		}
 		return(
-			<section className="container text-left">
-				<form onSubmit={this.handleUpdate}>
-					<div className="form-row">
+			<Modal
+				title="ADICIONAR"
+				visible={this.state.visibleModal}
+				onCancel={this.handleCancel}
+				footer={[
+					<Link key="back" to='/contacts' style={btnMargin} className="btn btn-light">CANCELAR</Link>,
+					<button onClick={this.handleUpdate.bind(this)} key="submit" type="submit" className="btn btn-primary">ATUALIZAR</button>
+				]}
+			>
+				<section className="container text-left">
+					<form>
 						<div className="form-group col-sm-6">
 							<label htmlFor="name">Nome</label>
 							<input type="text" className="form-control" name="name" 
@@ -70,19 +88,18 @@ export default class FormUpdate extends React.Component{
 							<label htmlFor="gender">Gênero</label>
 							<select id="gender" name="gender" onChange={this.handleGenderChange} 
 							className="form-control" required value={this.state.gender}>
-							    <option defaultValue value="">Escolha</option>
-							    <option value="MALE">Masculino</option>
-							    <option value="FEMALE">Feminino</option>
-							 </select>
+								<option defaultValue value="">Escolha</option>
+								<option value="MALE">Masculino</option>
+								<option value="FEMALE">Feminino</option>
+							</select>
 						</div>
 						<div className="form-group col-sm-3 ">
 							<label htmlFor="birthday">Nascimento</label>
 							<input type="date" className="form-control" name="birthday" 
 							onChange={this.handleBirthdayChange} id="birthday"
-							 placeholder="Data de Aniversário" value={this.state.birthday}/>
+							placeholder="Data de Aniversário" value={this.state.birthday}/>
 						</div>
-					</div>
-					<div className="form-row">
+
 						<div className="form-group col-sm-8">
 							<label htmlFor="email">Email</label>
 							<input type="email" name="email"  onChange={this.handleEmailChange} 
@@ -92,16 +109,12 @@ export default class FormUpdate extends React.Component{
 						<div className="form-group col-sm-4">
 							<label htmlFor="phone">Telefone</label>
 							<input type="number" className="form-control" name="phone"
-							 id="phone" onChange={this.handlePhoneChange}
+							id="phone" onChange={this.handlePhoneChange}
 							placeholder="Telefone" value={this.state.phone} />
 						</div>
-					</div>
-					<div className="text-right">
-						<Link to='/contacts' style={btnMargin} className="btn btn-light">Voltar</Link>
-						<button type="submit" className="btn btn-primary">Salvar</button>
-					</div>
-				</form>
-			</section>
+					</form>
+				</section>
+			</Modal>
 		)
 	}
 }

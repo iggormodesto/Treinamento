@@ -1,5 +1,6 @@
 import React from 'react';
-
+import {List} from 'antd';
+  //import 'antd/dist/antd.css';
 import { Link } from 'react-router-dom'
 import { Modal, Button } from 'antd';
 
@@ -11,6 +12,7 @@ export default class Contacts extends React.Component{
 		super(props);
 		this.state = {
 			contacts: [],
+			initLoading:true,
 			contactToDel: [],
 			visibleModal: false,
 		}
@@ -40,6 +42,7 @@ export default class Contacts extends React.Component{
   
 	componentDidMount() {
 		this.getContacts();
+		this.setState({initLoading:false})
 	}
 
 	getContacts(){
@@ -54,8 +57,6 @@ export default class Contacts extends React.Component{
 			err => {}
 		);
 	}
-
-	
 	deleteContact(contact) {
 		return fetch(contact._links.self.href, {
 			method: 'delete'
@@ -63,38 +64,68 @@ export default class Contacts extends React.Component{
 			this.getContacts();		
 		});
 	}
-
+	handleSearch=(event)=>{
+		var searchQuery=event.target.value.toLowerCase();
+		var displayedContacts=this.state.contacts.filter(function(el){
+		  var searchValue = el.name.toLowerCase();
+		  return searchValue.indexOf(searchQuery) !=-1;
+		});
+		if(searchQuery === ''){
+			this.getContacts();
+		}else{
+			this.setState({
+				contacts:displayedContacts
+			  });
+		}
+	}
 	render(){
+		const contacts = this.state.contacts;
+		const initLoading = this.state.initLoading;
 		return(
-			<div>
-				<ul>
-				  {this.state.contacts.map(contact =>
-					<li key={contact.name}>{contact.name}
-						
-						<Button type="primary" onClick={this.showModal.bind(this, contact)}>
-							Deletar
-						</Button>
-						
-						
-						<Link to={{pathname: '/updateContac',
-						state:{contact: contact}}} >Atualizar</Link>
-					</li>)
-				  }
-				  <Link to="/addContac">Adicionar</Link>
-				</ul>
+			<React.Fragment>
+				<input type="text" className="search-field" onChange={this.handleSearch}/>
+				<List
+				//className="demo-loadmore-list"
+				loading={initLoading}
+				itemLayout="horizontal"
+				dataSource={contacts}
+				pagination={{
+					onChange: (page) => {
+					  console.log(page);
+					},
+					pageSize: 5,
+				  }}
+				renderItem={contact => (
+					<List.Item actions={
+						[
+							//Adicionar o SVG aqui
+							<a onClick={this.showModal.bind(this, contact)}>
+								EXCLUIR
+							</a>,
+							<Link to={{pathname: '/updateContac',
+							state:{contact: contact}}} >EDITAR</Link>, 
+						]}>
+						<List.Item.Meta
+							title={contact.name}
+							description={contact.email}
+						/>
+					</List.Item>
+				)}
+				/>
+		  		<Link to="/addContac">Adicionar</Link>
 
-				
 				<Modal
 					title="Tem certeza que deseja excluir?"
 					visible={this.state.visibleModal}
-
+					onCancel={this.handleCancel}
+					
 					footer={[
 						<Button key="back" onClick={this.handleCancel.bind(this)}>Não</Button>,
 						<Button key="submit" onClick={this.handleOk.bind(this)}>Sim</Button>,
 					]}					
-				>
+					>
 				</Modal>
-			</div>			
+			</React.Fragment>
 		);
 	}
 }
