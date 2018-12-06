@@ -1,7 +1,4 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
-//import Contacts from './Contacts';
 import { Link } from 'react-router-dom'
 import { Modal } from 'antd';
 
@@ -56,17 +53,14 @@ export default class FormUpdate extends React.Component{
 	 	event.preventDefault();
 	}
 	render(){
-		const btnMargin={
-			marginRight: '10px'
-		}
 		return(
 			<Modal
 				title="EDITAR"
 				visible={this.state.visibleModal}
 				onCancel={this.handleCancel}
 				footer={[
-					<Link to='/contacts'>Cancelar</Link>,
-					<button onClick={this.handleUpdate.bind(this)} key="submit" type="submit" className="btn ant-btn-primary">ATUALIZAR</button>
+					<Link key="back" to='/contacts'>Cancelar</Link>,
+					<button key="submit" onClick={this.handleUpdate.bind(this)} type="submit" className="btn ant-btn-primary">ATUALIZAR</button>
 				]}
 			>
 				<section className="container text-left">

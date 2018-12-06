@@ -73,7 +73,7 @@ export default class Contacts extends React.Component{
 		var searchQuery=event.target.value.toLowerCase();
 		var displayedContacts=this.state.contacts.filter(function(el){
 		  var searchValue = el.name.toLowerCase();
-		  return searchValue.indexOf(searchQuery) !=-1;
+		  return searchValue.indexOf(searchQuery) !==-1;
 		});
 		if(searchQuery === ''){
 			this.getContacts();
@@ -138,8 +138,8 @@ export default class Contacts extends React.Component{
 					onCancel={this.handleCancel}
 					
 					footer={[
-						<Button key="back" onClick={this.handleCancel.bind(this)}>Não</Button>,
-						<Button key="submit" onClick={this.handleOk.bind(this)} className="btn ant-btn-primary">Sim</Button>,
+						<Button key="submit" onClick={this.handleOk.bind(this)}>Sim</Button>,
+						<Button key="back" onClick={this.handleCancel.bind(this)} className="btn ant-btn-primary">Não</Button>,
 					]}					
 					>
 				</Modal>

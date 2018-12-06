@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
 import 'antd/dist/antd.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import './css/App.css';
 import {
 	Form, 

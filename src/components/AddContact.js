@@ -2,9 +2,6 @@ import React from 'react';
 
 import { Modal } from 'antd';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Contact from '../models/Contact';
-
 import { Link } from 'react-router-dom'
 
 export default class AddContact extends React.Component{
@@ -102,7 +99,8 @@ export default class AddContact extends React.Component{
 							name="phone" id="phone"
 							value={this.state.contact.phone || ''}
 							onChange={this.handleInputChange}
-							placeholder="(00) 00000-0000" />
+							placeholder="(00) 00000-0000"
+							data-mask="(00) 0000-0000" data-mask-selectonfocus="true" />
 						</div>
 					</form>
 				</section>
