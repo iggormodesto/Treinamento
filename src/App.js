@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
+import 'antd/dist/antd.css';
 import './css/App.css';
 
 class App extends Component {
