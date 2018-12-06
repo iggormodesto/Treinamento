@@ -83,6 +83,10 @@ export default class Contacts extends React.Component{
 		const initLoading = this.state.initLoading;
 		return(
 			<React.Fragment>
+				<h1 className="title">
+					<span>Agenda</span>
+					<span>SNEWS</span>
+				</h1>
 				<input type="text" className="search-field" onChange={this.handleSearch}/>
 				<List
 				//className="demo-loadmore-list"
