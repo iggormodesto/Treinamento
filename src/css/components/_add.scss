@@ -9,4 +9,21 @@
             line-height: 100%;
         }
     }
+    .ant-modal-close {
+        svg path {
+            color: #fff;
+        }
+    }
+    form {
+        label {
+            width: 6rem;
+            text-align: right;
+            display: inline-block;
+            margin-right: 1rem;
+        }
+        input, select {
+            width: calc(100% - 7rem);
+            display: inline-block;
+        }
+    }
 }

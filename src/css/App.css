@@ -39,7 +39,7 @@ ul li {
 
 #root {
   min-height: 68vh;
-  margin: 3rem 0 4rem 0; }
+  margin: 3rem 5% 4rem; }
 
 #footer {
   background-color: #F2F2F2;
@@ -102,3 +102,16 @@ a {
     font-size: 2rem;
     font-weight: bold;
     line-height: 100%; }
+
+.ant-modal .ant-modal-close svg path {
+  color: #fff; }
+
+.ant-modal form label {
+  width: 6rem;
+  text-align: right;
+  display: inline-block;
+  margin-right: 1rem; }
+
+.ant-modal form input, .ant-modal form select {
+  width: calc(100% - 7rem);
+  display: inline-block; }
