@@ -61,23 +61,23 @@ export default class FormUpdate extends React.Component{
 		}
 		return(
 			<Modal
-				title="ADICIONAR"
+				title="EDITAR"
 				visible={this.state.visibleModal}
 				onCancel={this.handleCancel}
 				footer={[
-					<Link key="back" to='/contacts' style={btnMargin} className="btn btn-light">CANCELAR</Link>,
-					<button onClick={this.handleUpdate.bind(this)} key="submit" type="submit" className="btn btn-primary">ATUALIZAR</button>
+					<Link to='/contacts'>Cancelar</Link>,
+					<button onClick={this.handleUpdate.bind(this)} key="submit" type="submit" className="btn ant-btn-primary">ATUALIZAR</button>
 				]}
 			>
 				<section className="container text-left">
 					<form>
-						<div className="form-group col-sm-6">
+						<div className="form-group">
 							<label htmlFor="name">Nome</label>
 							<input type="text" className="form-control" name="name" 
 							onChange={this.handleInputChange} id="name" value={this.state.contact.name || ''} 
 							placeholder="Nome completo"/>
 						</div>
-						<div className="form-group col-sm-3">
+						<div className="form-group">
 							<label htmlFor="gender">Gênero</label>
 							<select id="gender" name="gender" onChange={this.handleInputChange} 
 							className="form-control" required value={this.state.contact.gender}>
@@ -86,20 +86,20 @@ export default class FormUpdate extends React.Component{
 								<option value="FEMALE">Feminino</option>
 							</select>
 						</div>
-						<div className="form-group col-sm-3 ">
+						<div className="form-group">
 							<label htmlFor="birthday">Nascimento</label>
 							<input type="date" className="form-control" name="birthday" 
 							onChange={this.handleInputChange} id="birthday"
 							placeholder="Data de Aniversário" value={this.state.contact.birthday || ''}/>
 						</div>
 
-						<div className="form-group col-sm-8">
+						<div className="form-group">
 							<label htmlFor="email">Email</label>
 							<input type="email" name="email"  onChange={this.handleInputChange} 
 							className="form-control" id="email" 
 							placeholder="E-mail" value={this.state.contact.email || ''}/>
 						</div>
-						<div className="form-group col-sm-4">
+						<div className="form-group">
 							<label htmlFor="phone">Telefone</label>
 							<input type="number" className="form-control" name="phone"
 							id="phone" onChange={this.handleInputChange}
