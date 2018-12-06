@@ -51,4 +51,9 @@ a {
     text-transform: uppercase;
     font-weight: bold;
     font-size: 4rem;
+    text-align: center;
+    color: #707070;
+    span:first-child {
+        font-weight: 100;
+    }
 }
