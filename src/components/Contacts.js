@@ -87,6 +87,7 @@ export default class Contacts extends React.Component{
 				<Modal
 					title="Tem certeza que deseja excluir?"
 					visible={this.state.visibleModal}
+					onCancel={this.handleCancel}
 
 					footer={[
 						<Button key="back" onClick={this.handleCancel.bind(this)}>Não</Button>,

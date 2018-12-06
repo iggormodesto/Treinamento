@@ -28,6 +28,13 @@ export default class AddContact extends React.Component{
 		this.setState({contact});
 	}
 
+	handleCancel = (e) => {
+		this.props.history.push("/contacts");
+		this.setState({
+			visibleModal: false,
+		});
+	}
+
 
 	handleSubmit = event => {
 		event.preventDefault();
@@ -54,8 +61,8 @@ export default class AddContact extends React.Component{
 				visible={this.state.visibleModal}
 				onCancel={this.handleCancel}
 				footer={[
-					<Link to='/contacts' style={btnMargin} className="btn btn-light">CANCELAR</Link>,
-					<button onClick={this.handleSubmit.bind(this)} type="submit" className="btn btn-primary">ADICIONAR</button>
+					<Link key="back" to='/contacts' style={btnMargin} className="btn btn-light">CANCELAR</Link>,
+					<button onClick={this.handleSubmit.bind(this)} key="submit" type="submit" className="btn btn-primary">ADICIONAR</button>
 				]}			
 			>
 				<section className="container text-left">
