@@ -24,6 +24,9 @@
   to {
     transform: rotate(360deg); } }
 
+body {
+  font-family: 'Source Sans Pro', sans-serif; }
+
 ul li {
   font-weight: bold;
   text-align: center; }
@@ -90,3 +93,12 @@ a {
     .main .login-form .ant-checkbox-checked .ant-checkbox-inner {
       background-color: #d52738;
       border-color: #d52738; }
+
+.ant-modal .ant-modal-header {
+  background-color: #D02431; }
+  .ant-modal .ant-modal-header .ant-modal-title {
+    text-align: center;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 100%; }
