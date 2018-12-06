@@ -2,6 +2,9 @@ import React from 'react';
 import {List} from 'antd';
   //import 'antd/dist/antd.css';
 import { Link } from 'react-router-dom'
+import { Modal, Button } from 'antd';
+
+import 'antd/dist/antd.css';
 
 
 export default class Contacts extends React.Component{
@@ -9,8 +12,32 @@ export default class Contacts extends React.Component{
 		super(props);
 		this.state = {
 			contacts: [],
-			initLoading:true
+			initLoading:true,
+			contactToDel: [],
+			visibleModal: false,
 		}
+	}
+	
+	showModal = (contact) => {
+	this.setState({contactToDel: contact})
+		this.setState({
+			visibleModal: true,
+		});
+	}
+
+	handleOk = (e) => {
+		this.deleteContact(this.state.contactToDel);
+		console.log(e);
+		this.setState({
+			visibleModal: false,
+		});
+	}
+
+	handleCancel = (e) => {
+		console.log(e);
+		this.setState({
+			visibleModal: false,
+		});
 	}
   
 	componentDidMount() {
@@ -72,7 +99,7 @@ export default class Contacts extends React.Component{
 					<List.Item actions={
 						[
 							//Adicionar o SVG aqui
-							<a onClick={this.deleteContact.bind(this, contact)}>
+							<a onClick={this.showModal.bind(this, contact)}>
 								EXCLUIR
 							</a>,
 							<Link to={{pathname: '/updateContac',
@@ -86,8 +113,19 @@ export default class Contacts extends React.Component{
 				)}
 				/>
 		  		<Link to="/addContac">Adicionar</Link>
-		  </React.Fragment>
+
+				<Modal
+					title="Tem certeza que deseja excluir?"
+					visible={this.state.visibleModal}
+					onCancel={this.handleCancel}
+					
+					footer={[
+						<Button key="back" onClick={this.handleCancel.bind(this)}>Não</Button>,
+						<Button key="submit" onClick={this.handleOk.bind(this)}>Sim</Button>,
+					]}					
+					>
+				</Modal>
+			</React.Fragment>
 		);
 	}
 }
-

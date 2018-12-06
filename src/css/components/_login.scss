@@ -1,0 +1,27 @@
+.main {
+    display: -webkit-flex; /* Safari */
+    -webkit-align-items: flex-start; /* Safari 7.0+ */
+    display: flex;
+    align-items: flex-start;
+    .login-form {
+        margin: 0 auto;
+        -webkit-align-self: center; /* Safari 7.0+ */
+        align-self: center;
+        width: 20rem;
+        .ant-btn {
+            width: 100%;
+        }
+        .login-form-forgot {
+            display: inline-block;
+            float: right;
+            color: #000;
+            &:hover {
+                color: #d52738;
+            }
+        }
+        .ant-checkbox-checked .ant-checkbox-inner {
+            background-color: #d52738;
+            border-color: #d52738;
+        }
+    }
+}
