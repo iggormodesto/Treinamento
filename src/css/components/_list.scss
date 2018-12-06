@@ -1,6 +1,10 @@
-ul {
-    li {
-        font-weight: bold;
-        text-align: center;
+.ant-list-item {
+    .ant-list-item-action {
+        align-self: center;
+        margin: 0;
+        .anticon {
+            vertical-align: 0;
+            margin-right: 4px;
+        }
     }
 }

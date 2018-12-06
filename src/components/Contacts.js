@@ -118,10 +118,14 @@ export default class Contacts extends React.Component{
 						[
 							//Adicionar o SVG aqui
 							<a onClick={this.showModal.bind(this, contact)}>
+								<Icon type="delete" />
 								EXCLUIR
 							</a>,
 							<Link to={{pathname: '/updateContac',
-							state:{contact: contact}}} >EDITAR</Link>, 
+							state:{contact: contact}}} >
+								<Icon type="edit" />
+								EDITAR
+							</Link>, 
 						]}>
 						<List.Item.Meta
 							title={contact.name}
