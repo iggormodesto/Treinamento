@@ -57,12 +57,13 @@ export default class AddContact extends React.Component{
 		}
 		return(
 			<Modal
-				title="ADICIONAR"
+				title="Adicionar"
 				visible={this.state.visibleModal}
 				onCancel={this.handleCancel}
 				footer={[
-					<Link key="back" to='/contacts' style={btnMargin} className="btn btn-light">CANCELAR</Link>,
-					<button onClick={this.handleSubmit.bind(this)} key="submit" type="submit" className="btn btn-primary">ADICIONAR</button>
+					<Link to='/contacts' style={btnMargin} className="btn btn-light">CANCELAR</Link>,
+					<button onClick={this.handleSubmit.bind(this)} type="submit" className="btn btn-primary">Adicionar</button>
+
 				]}			
 			>
 				<section className="container text-left">
