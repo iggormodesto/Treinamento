@@ -45,6 +45,9 @@ export default class AddContact extends React.Component{
 		}).then(res => { 	 
 			alert('Contato cadastrado');
 			this.props.history.push("/contacts");
+		})
+		.catch(function (error) {
+			console.log(error);
 		});
 	}
 	

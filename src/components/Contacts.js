@@ -32,14 +32,12 @@ export default class Contacts extends React.Component{
 
 	handleOk = (e) => {
 		this.deleteContact(this.state.contactToDel);
-		console.log(e);
 		this.setState({
 			visibleModal: false,
 		});
 	}
 
 	handleCancel = (e) => {
-		console.log(e);
 		this.setState({
 			visibleModal: false,
 		});
@@ -117,7 +115,7 @@ export default class Contacts extends React.Component{
 					<List.Item actions={
 						[
 							//Adicionar o SVG aqui
-							<a onClick={this.showModal.bind(this, contact)}>
+							<a role="button" onClick={this.showModal.bind(this, contact)}>
 								<Icon type="delete" />
 								EXCLUIR
 							</a>,
@@ -142,7 +140,7 @@ export default class Contacts extends React.Component{
 					onCancel={this.handleCancel}
 					
 					footer={[
-						<Button key="submit" onClick={this.handleOk.bind(this)}>Sim</Button>,
+						<a key="submit" onClick={this.handleOk.bind(this)}>Sim</a>,
 						<Button key="back" onClick={this.handleCancel.bind(this)} className="btn ant-btn-primary">Não</Button>,
 					]}					
 					>

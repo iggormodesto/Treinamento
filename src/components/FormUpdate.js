@@ -43,7 +43,6 @@ export default class FormUpdate extends React.Component{
 			},
 		    body: JSON.stringify(this.state.contact)
 		}).then(res=> {
-			console.log(res);
 			this.props.history.push("/contacts");
 			alert('Contato atualizado');
 		 })
