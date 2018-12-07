@@ -1,5 +1,5 @@
 import React from 'react';
-import {List, Form} from 'antd';
+import {List, Form, Tooltip} from 'antd';
 import { Link } from 'react-router-dom'
 import { Modal, Button } from 'antd';
 
@@ -102,7 +102,6 @@ export default class Contacts extends React.Component{
 				</Form>
 
 				<List
-				//className="demo-loadmore-list"
 				loading={initLoading}
 				itemLayout="horizontal"
 				dataSource={contacts}
@@ -115,7 +114,6 @@ export default class Contacts extends React.Component{
 				renderItem={contact => (
 					<List.Item actions={
 						[
-							//Adicionar o SVG aqui
 							<a href="#" onClick={this.showModal.bind(this, contact)}>
 								<Icon type="delete" />
 								EXCLUIR
@@ -126,17 +124,19 @@ export default class Contacts extends React.Component{
 								EDITAR
 							</Link>, 
 						]}>
-						<ul>
-							<li><h6>{contact.name}</h6></li>
-							<li>
-								<Icon type="mail" />
-								<p><a href="{contact.email}">{contact.email}</a></p>
-							</li>
-							<li>
-								<Icon type="phone" />
-								<p>{contact.phone}</p>
-							</li>
-						</ul>
+						<Tooltip placement="rightBottom" title={contact.gender}>
+							<ul>
+								<li><h6>{contact.name}</h6></li>
+								<li>
+									<Icon type="mail" />
+									<p>{contact.email}</p>
+								</li>
+								<li>
+									<Icon type="phone" />
+									<p>{contact.phone}</p>
+								</li>
+							</ul>
+						</Tooltip>
 					</List.Item>
 				)}
 				/>
