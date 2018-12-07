@@ -19,6 +19,7 @@ class App extends Component {
 	render() {
 		return (
 			<div className="main">
+				<h1>Login</h1>
 				<Form className="login-form">
 					<FormItem>
 						<Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Usuário" />
