@@ -50,7 +50,7 @@ export default class Contacts extends React.Component{
 	}
 
 	getContacts(){
-		fetch("http://localhost:8080/contacts", {
+		fetch("http://192.168.1.136:8080/contacts", {
 			method: 'get'
 		}).then(res => res.json())
 		.then(
@@ -126,10 +126,17 @@ export default class Contacts extends React.Component{
 								EDITAR
 							</Link>, 
 						]}>
-						<List.Item.Meta
-							title={contact.name}
-							description={contact.email + " | " + contact.phone}
-						/>
+						<ul>
+							<li><h6>{contact.name}</h6></li>
+							<li>
+								<Icon type="mail" />
+								<p><a href="{contact.email}">{contact.email}</a></p>
+							</li>
+							<li>
+								<Icon type="phone" />
+								<p>{contact.phone}</p>
+							</li>
+						</ul>
 					</List.Item>
 				)}
 				/>
