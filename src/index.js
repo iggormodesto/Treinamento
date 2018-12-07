@@ -27,8 +27,6 @@ ReactDOM.render(
 			<Switch>
 				<Route path="/" exact={true} component={App} />
 				<Route path="/contacts" exact={true} component={Contacts} />
-				<Route path="/addContac" component={AddContact} />
-				<Route path="/updateContac" component={FormUpdate} />
 				<Route path='*' component={PageNotFound} />
 			</Switch>
 		</BrowserRouter>
