@@ -50,7 +50,7 @@ export default class Contacts extends React.Component{
 	}
 
 	getContacts(){
-		fetch("http://192.168.1.136:8080/contacts", {
+		fetch("http://192.168.1.180:8080/contacts", {
 			method: 'get'
 		}).then(res => res.json())
 		.then(
@@ -124,7 +124,7 @@ export default class Contacts extends React.Component{
 								EDITAR
 							</Link>, 
 						]}>
-						<Tooltip placement="rightBottom" title={contact.gender}>
+						<Tooltip placement="rightBottom" title={contact.gender + ' | ' + contact.birthday}>
 							<ul>
 								<li><h6>{contact.name}</h6></li>
 								<li>
