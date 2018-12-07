@@ -31,7 +31,7 @@
 a {
     color: #000;
     font-weight: bold;
-    a:hover {
+    &:hover {
         color: #d52738;
         text-decoration: none;
     }
@@ -85,8 +85,8 @@ a {
     transition: width 1s;
     float: right;
     overflow: hidden;
-    position: absolute;
-    bottom: 10%;
+    position: fixed;
+    bottom: 7%;
     right: 5%;
     text-align: center;
     .anticon {
@@ -101,5 +101,15 @@ a {
         width: 200px;
         color: #fff;
         text-align: left;
+    }
+}
+
+.ant-pagination {
+    text-align: center;
+    .ant-pagination-item-active {
+        border-color: #d52738;
+        a {
+            color: #d52738;
+        }
     }
 }
