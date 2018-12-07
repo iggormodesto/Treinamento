@@ -13,9 +13,6 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import Contacts from './components/Contacts';
 
-import AddContact from './components/AddContact';
-import FormUpdate from './components/FormUpdate'
-
 import PageNotFound from './components/PageNotFound';
 
 // use applyMiddleware to add the thunk middleware to the store
