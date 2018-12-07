@@ -15,7 +15,10 @@ export default class AddContact extends React.Component{
 	}
 
 	componentWillReceiveProps(nextProps) {
-		this.setState({visibleModal: nextProps.visibleModalAdd});
+		this.setState({
+			visibleModal: nextProps.visibleModalAdd,
+			contact: []
+		});
 	}
 
 	handleInputChange = event => {
