@@ -23,22 +23,20 @@ export default class Contacts extends React.Component{
 	}
 	
 	showModal = (contact) => {
-	this.setState({contactToDel: contact})
 		this.setState({
+			contactToDel: contact,
 			visibleModal: true,
 		});
 	}
 
 	handleOk = (e) => {
 		this.deleteContact(this.state.contactToDel);
-		console.log(e);
 		this.setState({
 			visibleModal: false,
 		});
 	}
 
 	handleCancel = (e) => {
-		console.log(e);
 		this.setState({
 			visibleModal: false,
 		});
@@ -69,13 +67,15 @@ export default class Contacts extends React.Component{
 			err => {}
 		);
 	}
+
 	deleteContact(contact) {
-		return fetch(contact._links.self.href, {
+		fetch(contact._links.self.href, {
 			method: 'delete'
 		}).then(response => {
 			this.getContacts();		
 		});
 	}
+
 	handleSearch=(event)=>{
 		var searchQuery=event.target.value.toLowerCase();
 		var displayedContacts=this.state.contacts.filter(function(el){
