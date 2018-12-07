@@ -7,19 +7,16 @@
 }
 
 #root {
-    min-height: calc(84.5vh - 130px);
-    margin: 3rem 5% 4rem;
+    margin: 3rem 5% 6rem;
 }
 
 #footer {
-    position: relative;
-    right: 0;
-    bottom: 0;
-    left: 0;
     padding: 1rem;
     background-color: #F2F2F2;
     text-align: center;
-
+    position: fixed;
+    width: 100%;
+    bottom: 0;
     p {
         margin: 0;
         a {
@@ -91,7 +88,7 @@ a, a:not([href]):not([tabindex]) {
     float: right;
     overflow: hidden;
     position: fixed;
-    bottom: 13%;
+    bottom: 9%;
     right: 5%;
     text-align: center;
     text-transform: uppercase;
