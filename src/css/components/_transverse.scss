@@ -76,7 +76,7 @@ a, a:not([href]):not([tabindex]) {
 .btn-add {
     display: block;
     background: #d52738;
-    padding: 13px;
+    padding: 10px 14px;
     color: #fff;
     border-radius: 50px;
     width: 50px;
@@ -89,9 +89,17 @@ a, a:not([href]):not([tabindex]) {
     bottom: 7%;
     right: 5%;
     text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1rem;
+    line-height: 100%;
     cursor: pointer;
     .anticon {
         vertical-align: 0;
+        position: relative;
+        top: 0px;
+        right: 4px;
+        padding: 2px;
         svg {
             width: 25px;
             height: 25px;
@@ -99,7 +107,7 @@ a, a:not([href]):not([tabindex]) {
         }
     }
     &:hover {
-        width: 200px;
+        width: 220px;
         color: #fff;
         text-align: left;
     }
