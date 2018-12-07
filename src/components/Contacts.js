@@ -56,6 +56,14 @@ export default class Contacts extends React.Component{
 		.then(
 			data => {
 				const contacts = data._embedded.contacts;
+				contacts.map((contact) => {
+					if(contact.gender === null){
+						contact.gender = '';
+					}
+					if(contact.birthday === null){
+						contact.birthday = '';
+					}
+				})
 				this.setState({ contacts });
 				},
 			err => {}
