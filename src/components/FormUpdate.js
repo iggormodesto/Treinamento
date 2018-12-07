@@ -94,7 +94,7 @@ export default class FormUpdate extends React.Component{
 						</div>
 						<div className="form-group">
 							<label htmlFor="phone">Telefone</label>
-							<input type="number" className="form-control" name="phone"
+							<input className="form-control" name="phone"
 							id="phone" onChange={this.handleInputChange}
 							placeholder="Telefone" value={this.state.contact.phone || ''} />
 						</div>
