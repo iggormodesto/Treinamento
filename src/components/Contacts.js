@@ -1,15 +1,11 @@
 import React from 'react';
-import {List, Form, Tooltip} from 'antd';
 import { Link } from 'react-router-dom'
-import { Modal, Button } from 'antd';
-
-import 'antd/dist/antd.css';
-import {
-	Icon, 
-	Input
-} from 'antd';
+import {List, Form, Tooltip, Input, Icon, Modal} from 'antd';
 import FormItem from 'antd/lib/form/FormItem';
+import 'antd/dist/antd.css';
 
+import AddContact from './AddContact';
+import FormUpdate from './FormUpdate';
 
 export default class Contacts extends React.Component{
 	constructor(props){
@@ -18,11 +14,27 @@ export default class Contacts extends React.Component{
 			contacts: [],
 			initLoading:true,
 			contactToDel: [],
+			contactToUpdate: [],
 			visibleModal: false,
+			visibleModalAdd: false,
+			visibleModalUpdate: false,
 		}
 	}
+
+	showModalUpdate = (contact) =>  {
+		this.setState({
+			visibleModalUpdate: true,
+			contactToUpdate: contact,
+		});
+	}
+
+	showModalAdd() {
+		this.setState({
+			visibleModalAdd: true,
+		});
+	}
 	
-	showModal = (contact) => {
+	showModalDel = (contact) => {
 		this.setState({
 			contactToDel: contact,
 			visibleModal: true,
@@ -39,9 +51,11 @@ export default class Contacts extends React.Component{
 	handleCancel = (e) => {
 		this.setState({
 			visibleModal: false,
+			visibleModalAdd: false,
+			visibleModalUpdate: false
 		});
 	}
-  
+
 	componentDidMount() {
 		this.getContacts();
 		this.setState({initLoading:false})
@@ -54,9 +68,8 @@ export default class Contacts extends React.Component{
 		.then(
 			data => {
 				const contacts = data._embedded.contacts;
-				this.setState({ contacts });
-				},
-			err => {}
+				this.setState({ contacts: contacts });
+			},err => {}
 		);
 	}
 
@@ -114,15 +127,14 @@ export default class Contacts extends React.Component{
 				renderItem={contact => (
 					<List.Item actions={
 						[
-							<a href="#" onClick={this.showModal.bind(this, contact)}>
+							<a href="#" onClick={this.showModalDel.bind(this, contact)}>
 								<Icon type="delete" />
 								EXCLUIR
 							</a>,
-							<Link to={{pathname: '/updateContac',
-							state:{contact: contact}}} >
+							<a onClick={this.showModalUpdate.bind(this, contact)}>
 								<Icon type="edit" />
 								EDITAR
-							</Link>, 
+							</a>, 
 						]}>
 						<Tooltip placement="rightBottom" title={contact.gender + ' | ' + contact.birthday}>
 							<ul>
@@ -140,10 +152,22 @@ export default class Contacts extends React.Component{
 					</List.Item>
 				)}
 				/>
-		  		<Link to="/addContac" className="btn-add">
+		  		<button onClick={this.showModalAdd.bind(this)} className="btn-add">
 				  <Icon type="plus" />
 				  Adicionar Contato
-				</Link>
+				</button>
+
+				<AddContact 
+					handleCancel={this.handleCancel.bind(this)} 
+					visibleModalAdd={this.state.visibleModalAdd}
+					getContacts={this.getContacts.bind(this)}>
+				</AddContact>
+				<FormUpdate 
+					handleCancel={this.handleCancel.bind(this)} 
+					visibleModalUpdate={this.state.visibleModalUpdate}
+					getContacts={this.getContacts.bind(this)} 
+					contact={this.state.contactToUpdate} >
+				</FormUpdate>
 
 				<Modal
 					//title="Tem certeza que deseja excluir?"

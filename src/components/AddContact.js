@@ -9,12 +9,15 @@ export default class AddContact extends React.Component{
 		super(props);
 		this.state = {
 			contact: [],
-			visibleModal: true,
-		}
-		
+			visibleModal: true
+		}		
 		this.handleInputChange = this.handleInputChange.bind(this);
 	}
-	
+
+	componentWillReceiveProps(nextProps) {
+		this.setState({visibleModal: nextProps.visibleModalAdd});
+	}
+
 	handleInputChange = event => {
 		const target = event.target;
 		const value = target.value;
@@ -26,10 +29,10 @@ export default class AddContact extends React.Component{
 	}
 
 	handleCancel = (e) => {
-		this.props.history.push("/contacts");
 		this.setState({
 			visibleModal: false,
 		});
+		this.props.handleCancel();
 	}
 
 
@@ -42,9 +45,11 @@ export default class AddContact extends React.Component{
                 'Content-Type': 'application/json'
 			},
 		    body: JSON.stringify(this.state.contact)
-		}).then(res => { 	 
+		}).then(res => {
+			this.handleCancel();
+			this.props.handleCancel();
+			this.props.getContacts();
 			alert('Contato cadastrado');
-			this.props.history.push("/contacts");
 		})
 		.catch(function (error) {
 			console.log(error);
@@ -58,7 +63,7 @@ export default class AddContact extends React.Component{
 				visible={this.state.visibleModal}
 				onCancel={this.handleCancel}
 				footer={[
-					<Link key="back" to='/contacts'>Cancelar</Link>,
+					<a key="back" onClick={this.handleCancel}>Cancelar</a>,
 					<button key="submit" onClick={this.handleSubmit.bind(this)} type="submit" className="btn ant-btn-primary">Adicionar</button>
 
 				]}			

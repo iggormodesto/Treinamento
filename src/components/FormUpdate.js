@@ -11,6 +11,7 @@ export default class FormUpdate extends React.Component{
 		}
 		this.handleUpdate = this.handleUpdate.bind(this);
 	}
+
 	handleInputChange = event => {
 		const target = event.target;
 		const value = target.value;
@@ -21,21 +22,22 @@ export default class FormUpdate extends React.Component{
 		this.setState({contact});
 	}
 	
-	componentDidMount(){
+	componentWillReceiveProps(nextProps) {
 		this.setState({
-			contact: this.props.location.state.contact
-		})
+			contact: nextProps.contact,
+			visibleModal: nextProps.visibleModalUpdate
+		});
 	}
 
 	handleCancel = (e) => {
-		this.props.history.push("/contacts");
 		this.setState({
 			visibleModal: false,
 		});
+		this.props.handleCancel();
 	}
 	
 	handleUpdate = event => {
-		fetch(this.props.location.state.contact._links.self.href, {
+		fetch(this.state.contact._links.self.href, {
 			method: 'PUT',
 			headers: {
 				'Accept': 'application/json',
@@ -43,7 +45,9 @@ export default class FormUpdate extends React.Component{
 			},
 		    body: JSON.stringify(this.state.contact)
 		}).then(res=> {
-			this.props.history.push("/contacts");
+			this.handleCancel();
+			this.props.handleCancel();
+			this.props.getContacts();
 			alert('Contato atualizado');
 		 })
 		 .catch(function (error) {
@@ -58,7 +62,7 @@ export default class FormUpdate extends React.Component{
 				visible={this.state.visibleModal}
 				onCancel={this.handleCancel}
 				footer={[
-					<Link key="back" to='/contacts'>Cancelar</Link>,
+					<a onClick={this.handleCancel} key="back">Cancelar</a>,
 					<button key="submit" onClick={this.handleUpdate.bind(this)} type="submit" className="btn ant-btn-primary">Atualizar</button>
 				]}
 			>
