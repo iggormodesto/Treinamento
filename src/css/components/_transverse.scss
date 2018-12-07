@@ -28,7 +28,7 @@
     }
 }
 
-a {
+a, a:not([href]):not([tabindex]) {
     color: #000;
     font-weight: bold;
     &:hover {
@@ -89,6 +89,7 @@ a {
     bottom: 7%;
     right: 5%;
     text-align: center;
+    cursor: pointer;
     .anticon {
         vertical-align: 0;
         svg {
