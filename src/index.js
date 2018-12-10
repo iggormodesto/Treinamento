@@ -5,9 +5,10 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux'
-import thunk from 'redux-thunk';
+//import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import configureStore from './store/configureStore';
+//import thunk from 'redux-thunk';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
@@ -16,7 +17,8 @@ import Contacts from './components/Contacts';
 import PageNotFound from './components/PageNotFound';
 
 // use applyMiddleware to add the thunk middleware to the store
-const store = createStore(applyMiddleware(thunk));
+//const store = createStore(applyMiddleware(thunk));
+const store = configureStore();
 
 ReactDOM.render(
 	<Provider store={store}>

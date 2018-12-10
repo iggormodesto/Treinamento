@@ -2,9 +2,13 @@ import React from 'react';
 
 import { Modal } from 'antd';
 
-import { Link } from 'react-router-dom'
+//import { Link } from 'react-router-dom';
 
-export default class AddContact extends React.Component{
+import { connect } from 'react-redux';
+//import * as contactAction from '../actions/contactAction';
+import { addContact } from '../actions/contactAddAction';
+
+export class AddContact extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -40,23 +44,12 @@ export default class AddContact extends React.Component{
 
 
 	handleSubmit = event => {
+		
+		this.props.onAddContact(this.state.contact);
+		this.handleCancel();
+		this.props.handleCancel();
+		//this.props.getContacts();
 		event.preventDefault();
-		fetch('http://192.168.1.180:8080/contacts', {
-			method: 'POST',
-			headers: {
-				'Accept': 'application/json',
-                'Content-Type': 'application/json'
-			},
-		    body: JSON.stringify(this.state.contact)
-		}).then(res => {
-			this.handleCancel();
-			this.props.handleCancel();
-			this.props.getContacts();
-			alert('Contato cadastrado');
-		})
-		.catch(function (error) {
-			console.log(error);
-		});
 	}
 	
 	render(){
@@ -120,3 +113,16 @@ export default class AddContact extends React.Component{
 	}
 }
 
+const mapStateToProps = (state, ownProps) => {
+	return {
+	  contacts: state.contacts
+	}
+  };
+  
+  const mapDispatchToProps = (dispatch) => {
+	return {
+	  onAddContact: contact => dispatch(addContact(contact))
+	}
+  };
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(AddContact);

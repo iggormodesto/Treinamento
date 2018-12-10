@@ -7,7 +7,12 @@ import 'antd/dist/antd.css';
 import AddContact from './AddContact';
 import FormUpdate from './FormUpdate';
 
-export default class Contacts extends React.Component{
+import { connect } from 'react-redux';
+//import * as contactAction from '../actions/contactAction';
+import { getAllContacts } from '../actions/contactGetAction';
+import { deleteContact } from '../actions/contactDeleteAction';
+
+export class Contacts extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -58,11 +63,14 @@ export default class Contacts extends React.Component{
 
 	componentDidMount() {
 		this.getContacts();
-		this.setState({initLoading:false})
+		this.setState({
+			initLoading:false});
 	}
 
 	getContacts(){
-		fetch("http://192.168.1.180:8080/contacts", {
+		this.props.onGetAllContacts();
+		/*
+		fetch("http://localhost:8080/contacts", {
 			method: 'get'
 		}).then(res => res.json())
 		.then(
@@ -83,16 +91,22 @@ export default class Contacts extends React.Component{
 			}
 
 		);
+		*/
 	}
 
 	deleteContact(contact) {
+		const contactIndex = this.props.contacts.list.indexOf(contact);
+		//console.log(contactIndex);
+		this.props.onDeleteContact(contact, contactIndex);
+		/*
 		fetch(contact._links.self.href, {
 			method: 'delete'
 		}).then(response => {
 			this.getContacts();		
 		});
+		*/
 	}
-
+	/**Broken, todo 
 	handleSearch=(event)=>{
 		var searchQuery=event.target.value.toLowerCase();
 		var displayedContacts=this.state.contacts.filter(function(el){
@@ -107,16 +121,18 @@ export default class Contacts extends React.Component{
 			  });
 		}
 	}
+	*/
 	render(){
-		const contacts = this.state.contacts;
+		const contacts = this.props.contacts.list;
 		const initLoading = this.state.initLoading;
+		console.log(this.props);
 		return(
 			<React.Fragment>
 				<h1 className="title">
 					<span>Agenda</span>
 					<span>SNEWS</span>
 				</h1>
-
+				{/*Broken, todo
 				<Form>
 					<FormItem>
 						<Input className="search-field" 
@@ -125,7 +141,7 @@ export default class Contacts extends React.Component{
 							placeholder="Busca" />
 					</FormItem>
 				</Form>
-
+				*/}
 				<List
 				loading={initLoading}
 				itemLayout="horizontal"
@@ -139,7 +155,7 @@ export default class Contacts extends React.Component{
 				renderItem={contact => (
 					<List.Item actions={
 						[
-							<a href="#" onClick={this.showModalDel.bind(this, contact)}>
+							<a onClick={this.showModalDel.bind(this, contact)}>
 								<Icon type="delete" />
 								EXCLUIR
 							</a>,
@@ -197,3 +213,18 @@ export default class Contacts extends React.Component{
 		);
 	}
 }
+const mapStateToProps = (state, ownProps) => {
+	return {
+	  contacts: state.contacts
+	}
+  };
+  
+  const mapDispatchToProps = (dispatch) => {
+	return {
+	  onGetAllContacts: () => dispatch(getAllContacts()),
+	  onDeleteContact: (contact, contactIndex) => dispatch(deleteContact(contact, contactIndex))
+	  
+	}
+  };
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(Contacts);
