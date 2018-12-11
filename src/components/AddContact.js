@@ -44,11 +44,8 @@ export class AddContact extends React.Component{
 
 
 	handleSubmit = event => {
-		
 		this.props.onAddContact(this.state.contact);
 		this.handleCancel();
-		this.props.handleCancel();
-		//this.props.getContacts();
 		event.preventDefault();
 	}
 	

@@ -1,4 +1,5 @@
 import {GET_ALL_CONTACTS_FAILURE, GET_ALL_CONTACTS_STARTED, GET_ALL_CONTACTS_SUCCESS}  from '../actions/actionTypes';
+import {SEARCH_CONTACTS_STARTED, SEARCH_CONTACTS_SUCCESS}  from '../actions/actionTypes';
 
 const initialState = {
     loading: false,
@@ -13,8 +14,7 @@ export default (state = initialState, action) => {
                 loading: false,
                 error: null,
                 list: action.payload
-            };
-      
+            };            
         case GET_ALL_CONTACTS_STARTED:
             return {
                 ...state,
@@ -26,6 +26,19 @@ export default (state = initialState, action) => {
                 ...state,
                 loading: false,
                 error: action.contacts.error
+            };
+        case SEARCH_CONTACTS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                list: action.payload
+            };
+        case SEARCH_CONTACTS_STARTED:
+            return {
+                ...state,
+                loading: true,
+                error: null
             };
         default:
             return state;

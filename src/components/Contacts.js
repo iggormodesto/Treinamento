@@ -9,14 +9,14 @@ import FormUpdate from './FormUpdate';
 
 import { connect } from 'react-redux';
 //import * as contactAction from '../actions/contactAction';
-import { getAllContacts } from '../actions/contactGetAction';
+import { getAllContacts, handleSearch } from '../actions/contactGetAction';
 import { deleteContact } from '../actions/contactDeleteAction';
 
 export class Contacts extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			contacts: [],
+			// contacts: [],
 			initLoading:true,
 			contactToDel: [],
 			contactToUpdate: [],
@@ -62,66 +62,27 @@ export class Contacts extends React.Component{
 	}
 
 	componentDidMount() {
-		this.getContacts();
+		this.props.onGetAllContacts();
+		
 		this.setState({
 			initLoading:false});
 	}
 
-	getContacts(){
-		this.props.onGetAllContacts();
-		/*
-		fetch("http://localhost:8080/contacts", {
-			method: 'get'
-		}).then(res => res.json())
-		.then(
-			data => {
-				const contacts = data._embedded.contacts;
-				contacts.map((contact) => {
-					if(contact.gender === null){
-						contact.gender = '';
-					}
-					if(contact.birthday === null){
-						contact.birthday = '';
-					}
-				})
-				this.setState({ contacts });
-				},
-			err => {
-				console.log(err);
-			}
-
-		);
-		*/
-	}
 
 	deleteContact(contact) {
 		const contactIndex = this.props.contacts.list.indexOf(contact);
-		//console.log(contactIndex);
 		this.props.onDeleteContact(contact, contactIndex);
-		/*
-		fetch(contact._links.self.href, {
-			method: 'delete'
-		}).then(response => {
-			this.getContacts();		
-		});
-		*/
 	}
-	/**Broken, todo 
-	handleSearch=(event)=>{
-		var searchQuery=event.target.value.toLowerCase();
-		var displayedContacts=this.state.contacts.filter(function(el){
-		  var searchValue = el.name.toLowerCase();
-		  return searchValue.indexOf(searchQuery) !==-1;
-		});
+
+	handleSearch = (event) => {
+		var searchQuery = event.target.value.toLowerCase();
 		if(searchQuery === ''){
-			this.getContacts();
+			this.props.onGetAllContacts();
 		}else{
-			this.setState({
-				contacts:displayedContacts
-			  });
+			this.props.onHandleSearch(this.props.contacts.list, searchQuery);
 		}
 	}
-	*/
+	
 	render(){
 		const contacts = this.props.contacts.list;
 		const initLoading = this.state.initLoading;
@@ -132,7 +93,7 @@ export class Contacts extends React.Component{
 					<span>Agenda</span>
 					<span>SNEWS</span>
 				</h1>
-				{/*Broken, todo
+				{
 				<Form>
 					<FormItem>
 						<Input className="search-field" 
@@ -141,7 +102,7 @@ export class Contacts extends React.Component{
 							placeholder="Busca" />
 					</FormItem>
 				</Form>
-				*/}
+				}
 				<List
 				loading={initLoading}
 				itemLayout="horizontal"
@@ -188,12 +149,12 @@ export class Contacts extends React.Component{
 				<AddContact 
 					handleCancel={this.handleCancel.bind(this)} 
 					visibleModalAdd={this.state.visibleModalAdd}
-					getContacts={this.getContacts.bind(this)}>
+					getContacts={this.props.getContacts}>
 				</AddContact>
 				<FormUpdate 
 					handleCancel={this.handleCancel.bind(this)} 
 					visibleModalUpdate={this.state.visibleModalUpdate}
-					getContacts={this.getContacts.bind(this)} 
+					getContacts={this.props.getContacts} 
 					contact={this.state.contactToUpdate} >
 				</FormUpdate>
 
@@ -222,6 +183,7 @@ const mapStateToProps = (state, ownProps) => {
   const mapDispatchToProps = (dispatch) => {
 	return {
 	  onGetAllContacts: () => dispatch(getAllContacts()),
+	  onHandleSearch: (contacts, searchQuery) => dispatch(handleSearch(contacts, searchQuery)),
 	  onDeleteContact: (contact, contactIndex) => dispatch(deleteContact(contact, contactIndex))
 	  
 	}

@@ -1,8 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
 import { Modal } from 'antd';
 
-export default class FormUpdate extends React.Component{
+
+import { connect } from 'react-redux';
+import { updateContact } from '../actions/contactUpdateAction';
+
+export class FormUpdate extends React.Component{
 	constructor(props){
 		super(props);
 		this.state= {
@@ -37,23 +40,9 @@ export default class FormUpdate extends React.Component{
 	}
 	
 	handleUpdate = event => {
-		fetch(this.state.contact._links.self.href, {
-			method: 'PUT',
-			headers: {
-				'Accept': 'application/json',
-                'Content-Type': 'application/json'
-			},
-		    body: JSON.stringify(this.state.contact)
-		}).then(res=> {
-			this.handleCancel();
-			this.props.handleCancel();
-			this.props.getContacts();
-			alert('Contato atualizado');
-		 })
-		 .catch(function (error) {
-			console.log(error);
-		  });
-	 	event.preventDefault();
+		this.props.onUpdateContact(this.state.contact);
+		this.handleCancel();
+		event.preventDefault();
 	}
 	render(){
 		return(
@@ -109,3 +98,16 @@ export default class FormUpdate extends React.Component{
 	}
 }
 
+const mapStateToProps = (state, ownProps) => {
+	return {
+	  contacts: state.contacts
+	}
+  };
+  
+  const mapDispatchToProps = (dispatch) => {
+	return {
+	  onUpdateContact: contact => dispatch(updateContact(contact))
+	}
+  };
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(FormUpdate);
