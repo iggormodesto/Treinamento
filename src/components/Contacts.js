@@ -79,7 +79,7 @@ export class Contacts extends React.Component{
 		if(searchQuery === ''){
 			this.props.onGetAllContacts();
 		}else{
-			this.props.onHandleSearch(this.props.contacts.list, searchQuery);
+			this.props.onHandleSearch(this.props.contacts.search, searchQuery);
 		}
 	}
 	

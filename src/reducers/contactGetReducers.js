@@ -4,7 +4,8 @@ import {SEARCH_CONTACTS_STARTED, SEARCH_CONTACTS_SUCCESS}  from '../actions/acti
 const initialState = {
     loading: false,
     error: null,
-    list: []
+    list: [],
+    search: [],
 }
 export default (state = initialState, action) => {
     switch(action.type){
@@ -13,7 +14,8 @@ export default (state = initialState, action) => {
                 ...state,
                 loading: false,
                 error: null,
-                list: action.payload
+                list: action.payload,
+                search: action.payload,
             };            
         case GET_ALL_CONTACTS_STARTED:
             return {
@@ -32,7 +34,7 @@ export default (state = initialState, action) => {
                 ...state,
                 loading: false,
                 error: null,
-                list: action.payload
+                list: action.payload,
             };
         case SEARCH_CONTACTS_STARTED:
             return {
